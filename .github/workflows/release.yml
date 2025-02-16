@@ -23,11 +23,10 @@ jobs:
       - name: Move Docker Data Dir
         run: |
           df -h
-          mkdir /mnt/docker-root
+          sudo mkdir /mnt/docker-root
           cat /etc/docker/daemon.json
-          echo '{"data-root": "/mnt/docker-root"}' > /etc/docker/daemon.json
-          systemctl daemon-reload
-          systemctl restart docker
+          echo '{"data-root": "/mnt/docker-root"}' | sudo tee /etc/docker/daemon.json
+          sudo service docker restart
 
       - name: Checkout repository
         uses: actions/checkout@v4

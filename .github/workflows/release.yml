@@ -24,7 +24,6 @@ jobs:
         run: |
           df -h
           sudo mkdir /mnt/docker-root
-          cat /etc/docker/daemon.json
           echo '{"data-root": "/mnt/docker-root"}' | sudo tee /etc/docker/daemon.json
           sudo service docker restart
 

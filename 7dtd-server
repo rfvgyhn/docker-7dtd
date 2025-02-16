@@ -1,0 +1,20 @@
+#!/bin/bash
+
+shutdown() {
+  7dtd-shutdown
+}
+
+trap shutdown SIGTERM
+
+./7DaysToDieServer.x86_64 \
+  -logfile /dev/stdout \
+  -configfile=$CONFIG_FILE \
+  -quit \
+  -batchmode \
+  -nographics \
+  -dedicated \
+  $@
+  #-dedicated &
+
+#child=$!
+#wait "$child"

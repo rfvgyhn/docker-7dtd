@@ -1,0 +1,15 @@
+#!/bin/bash
+
+shutdown() {
+  nc -i 1 -q 1 -C 127.0.0.1 8081 <<EOS
+    shutdown
+    exit
+EOS
+}
+
+while true; do
+  echo "Sending shutdown command.."
+  shutdown && break
+  echo "Trying again in 2 seconds.."
+  sleep 2
+done

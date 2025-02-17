@@ -1,4 +1,4 @@
-FROM cm2network/steamcmd:steam as build
+FROM cm2network/steamcmd:steam AS build
 ARG VERSION
 ARG INSTALL_ARGS
 RUN set -x \

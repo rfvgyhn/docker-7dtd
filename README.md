@@ -19,7 +19,7 @@ docker run -d --name 7dtd \
   -p 8081:8081/tcp \
   -p 26900-26903:26900-26903/udp \
   -p 26900:26900/tcp \
-   rfvgyhn/7dtd
+   ghcr.io/rfvgyhn/7dtd
 ```
 
 Note that the container runs as non-root user 1000:1000. Make sure your mounted volume(s) have the correct permissions. (When running Docker in rootless mode, the user is remapped to a different id, usually 100999:100999)
@@ -33,7 +33,7 @@ You can specify a specific version using the available [tags][2]
 
 
 [0]: https://www.7daystodie.com/
-[1]: https://hub.docker.com/r/rfvgyhn/7dtd
-[2]: https://hub.docker.com/r/rfvgyhn/7dtd/tags
-[3]: https://img.shields.io/docker/image-size/rfvgyhn/7dtd/latest
-[4]: https://img.shields.io/badge/v-1.0.0.368883-blue
+[1]: https://github.com/rfvgyhn/docker-7dtd/pkgs/container/7dtd
+[2]: https://github.com/rfvgyhn/docker-7dtd/pkgs/container/7dtd/versions?filters%5Bversion_type%5D=tagged
+[3]: https://ghcr-badge.egpl.dev/rfvgyhn/7dtd/size?color=%231082c2&tag=latest
+[4]: https://img.shields.io/badge/v-1.3--b9-blue

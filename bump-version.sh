@@ -2,7 +2,7 @@
 
 set -ex
 
-[[ $1 =~ ^[0-9.]+$ ]] || { echo "First arg should be version" >&2; exit 1; }
+[[ $1 =~ ^[0-9A-Za-z.-]+$ ]] || { echo "First arg should be version" >&2; exit 1; }
 [[ $2 =~ ^(stable)$ ]] || { echo "Invalid channel (stable)." >&2; exit 1; }
 
 version=$1
@@ -11,7 +11,7 @@ commit_message="upgrade $channel to $version"
 
 stable() {
     sed -i "s/^stable.*$/stable: $version/" version.txt
-    sed -i "s|^\[4\].*|[4]: https://img.shields.io/badge/v-$version-blue|" README.md
+    sed -i "s|^\[4\].*|[4]: https://img.shields.io/badge/v-${version//-/--}-blue|" README.md
 }
 
 echo "Version: $version"

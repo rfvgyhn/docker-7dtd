@@ -1,4 +1,5 @@
 FROM cm2network/steamcmd:steam as build
+ARG VERSION
 ARG INSTALL_ARGS
 RUN set -x \
 	&& "${STEAMCMDDIR}/steamcmd.sh" \

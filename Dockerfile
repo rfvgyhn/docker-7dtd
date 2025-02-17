@@ -36,6 +36,7 @@ EXPOSE 8081/tcp
 EXPOSE 26900-26903/udp
 
 ENV CONFIG_FILE=/home/steam/.local/share/7DaysToDie/serverconfig.xml
+ENV LD_LIBRARY_PATH="/home/steam/7dtd"
 HEALTHCHECK CMD [ "7dtd-status" ]
 
 ENTRYPOINT ["7dtd-server"]

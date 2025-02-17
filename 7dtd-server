@@ -13,4 +13,7 @@ trap shutdown SIGTERM
   -batchmode \
   -nographics \
   -dedicated \
-  $@
+  $@ &
+
+# Need to wait for trap to work properly
+wait $!

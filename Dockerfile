@@ -24,7 +24,7 @@ RUN chmod +x /usr/local/bin/7dtd-*
 RUN set -x \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
-      netcat-traditional \
+      ca-certificates netcat-traditional \
     && rm -rf /var/lib/apt/lists/*
 
 USER steam

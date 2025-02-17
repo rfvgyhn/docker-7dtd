@@ -41,7 +41,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
-            type=raw,value=${{ env.VERSION }}
+            type=raw,value=${{ env.VERSION }},priority=1000
           labels: |
             org.opencontainers.image.title=7 Days to Die Dedicated Server
             org.opencontainers.image.description=7 Days to Die Dedicated Server

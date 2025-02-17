@@ -14,7 +14,9 @@ latest | [![Size][3]][1]  | [![Version][4]][1]
 * `/home/steam/7dtd/Mods` mount for mods
 
 ```
-docker run -d --name 7dtd \
+docker run -d \
+  --name 7dtd \
+  --ulimit nofile=10240 \
   -v /opt/7dtd/data:/home/steam/.local/share/7DaysToDie \
   -p 8081:8081/tcp \
   -p 26900-26903:26900-26903/udp \

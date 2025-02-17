@@ -19,7 +19,6 @@ RUN set -x \
 WORKDIR /home/steam/7dtd
 COPY --from=build --chown=steam /home/steam/7dtd .
 ADD 7dtd-* /usr/local/bin/
-RUN chmod +x /usr/local/bin/7dtd-*
 
 RUN set -x \
     && apt-get update \

@@ -14,7 +14,3 @@ trap shutdown SIGTERM
   -nographics \
   -dedicated \
   $@
-  #-dedicated &
-
-#child=$!
-#wait "$child"

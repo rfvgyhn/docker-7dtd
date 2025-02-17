@@ -11,8 +11,6 @@ WORKDIR /home/steam/7dtd
 RUN rm -r steamapps
 
 FROM debian:stable-slim
-LABEL org.opencontainers.image.title="7 Days to Die Dedicated Server"
-LABEL org.opencontainers.image.url="https://7daystodie.com/"
 
 RUN set -x \
     && useradd -m steam \

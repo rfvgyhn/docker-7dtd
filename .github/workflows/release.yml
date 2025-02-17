@@ -42,6 +42,10 @@ jobs:
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=raw,value=${{ env.VERSION }}
+          labels: |
+            org.opencontainers.image.title=7 Days to Die Dedicated Server
+            org.opencontainers.image.description=7 Days to Die Dedicated Server
+            org.opencontainers.image.url=https://7daystodie.com/
 
       - name: Login to GHCR
         uses: docker/login-action@v3

@@ -41,9 +41,3 @@ HEALTHCHECK CMD [ "7dtd-status" ]
 
 ENTRYPOINT ["7dtd-server"]
 
-# 2025-02-15T17:54:30 0.069 WRN The open files limit is too low (1024) and may cause crashes. Recommended is at least 10240. Follow these steps to increment it:
-#   - Open /etc/security/limits.conf with a text editor: 'sudo editor /etc/security/limits.conf'
-#   - Add or update the line: 'steam soft nofile 10240'
-#   - Save the file and exit the editor
-#   - Apply the changes: Log out and back in or restart the system
-

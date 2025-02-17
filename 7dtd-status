@@ -1,6 +1,8 @@
 #!/bin/bash
+port=$(grep -Po '<property name="TelnetPort".*value="\K[^"]+' /home/steam/.local/share/7DaysToDie/serverconfig.xml)
+pass=$(grep -Po '<property name="TelnetPassword".*value="\K[^"]+' /home/steam/.local/share/7DaysToDie/serverconfig.xml)
 
-if echo gt | nc -q 1 -C 127.0.0.1 8081 2>&1 | grep -q "Connection refused\|NullReferenceException"; then
+if (echo "$pass" ; echo gt) | nc -q 1 -C 127.0.0.1 $port 2>&1 | grep -q -i "Connection refused\|NullReferenceException"; then
     exit 1
 fi
 

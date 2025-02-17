@@ -1,7 +1,10 @@
 #!/bin/bash
 
 shutdown() {
-  nc -i 1 -q 1 -C 127.0.0.1 8081 <<EOS
+  port=$(grep -Po '<property name="TelnetPort".*value="\K[^"]+' /home/steam/.local/share/7DaysToDie/serverconfig.xml)
+  pass=$(grep -Po '<property name="TelnetPassword".*value="\K[^"]+' /home/steam/.local/share/7DaysToDie/serverconfig.xml)
+  nc -i 1 -q 1 -C 127.0.0.1 $port <<EOS
+    $pass
     shutdown
     exit
 EOS

@@ -1,70 +1,70 @@
 name: Build and Publish Docker Image
 
 on:
-  workflow_dispatch:
-  push:
-    tags:
-      - 'v*'
+    workflow_dispatch:
+    push:
+        tags:
+            - "v*"
 
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/7dtd
+    REGISTRY: ghcr.io
+    IMAGE_NAME: ${{ github.repository_owner }}/7dtd
 
 jobs:
-  build-and-publish:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-      attestations: write
-      id-token: write
-    
-    steps:      
-      - name: Move Docker Data Dir
-        run: |
-          df -h
-          sudo mkdir /mnt/docker-root
-          echo '{"data-root": "/mnt/docker-root"}' | sudo tee /etc/docker/daemon.json
-          sudo service docker restart
+    build-and-publish:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            packages: write
+            attestations: write
+            id-token: write
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        steps:
+            - name: Move Docker Data Dir
+              run: |
+                  df -h
+                  sudo mkdir /mnt/docker-root
+                  echo '{"data-root": "/mnt/docker-root"}' | sudo tee /etc/docker/daemon.json
+                  sudo service docker restart
 
-      - name: Get Version
-        run: |
-          echo "VERSION=$(cut -d' ' -f 2- version.txt)" >> $GITHUB_ENV
-      
-      - name: Extract metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=raw,value=${{ env.VERSION }},priority=1000
-          labels: |
-            org.opencontainers.image.title=7 Days to Die Dedicated Server
-            org.opencontainers.image.description=7 Days to Die Dedicated Server
-            org.opencontainers.image.url=https://7daystodie.com/
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Login to GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+            - name: Get Version
+              run: |
+                  echo "VERSION=$(cut -d' ' -f 2- version.txt)" >> $GITHUB_ENV
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+            - name: Extract metadata
+              id: meta
+              uses: docker/metadata-action@v5
+              with:
+                  images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+                  tags: |
+                      type=raw,value=latest,enable=true
+                      type=raw,value=${{ env.VERSION }},priority=1000
+                  labels: |
+                      org.opencontainers.image.title=7 Days to Die Dedicated Server
+                      org.opencontainers.image.description=7 Days to Die Dedicated Server
+                      org.opencontainers.image.url=https://7daystodie.com/
 
-      - name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          build-args: |
-            VERSION="$VERSION"
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+            - name: Login to GHCR
+              uses: docker/login-action@v3
+              with:
+                  registry: ${{ env.REGISTRY }}
+                  username: ${{ github.repository_owner }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Build and push
+              uses: docker/build-push-action@v6
+              with:
+                  context: .
+                  push: true
+                  build-args: |
+                      VERSION="$VERSION"
+                  tags: ${{ steps.meta.outputs.tags }}
+                  labels: ${{ steps.meta.outputs.labels }}
+                  cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
+                  cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max

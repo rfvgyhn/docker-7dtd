@@ -1,1 +1,1 @@
-stable: 1.3-b9
+stable: 1.4-b8

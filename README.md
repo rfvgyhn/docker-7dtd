@@ -38,4 +38,4 @@ You can specify a specific version using the available [tags][2]
 [1]: https://github.com/rfvgyhn/docker-7dtd/pkgs/container/7dtd
 [2]: https://github.com/rfvgyhn/docker-7dtd/pkgs/container/7dtd/versions?filters%5Bversion_type%5D=tagged
 [3]: https://ghcr-badge.egpl.dev/rfvgyhn/7dtd/size?color=%231082c2&tag=latest
-[4]: https://img.shields.io/badge/v-1.3--b9-blue
+[4]: https://img.shields.io/badge/v-1.4--b8-blue
